@@ -63,7 +63,7 @@ namespace Tonic {
     checkCAError(error, "Error setting kExtAudioFileProperty_ClientDataFormat.");
 
     // Determine the length of the file, in frames
-    SInt64 numFrames;
+    SInt64 numFrames = 0;
     UInt32 intSize = sizeof(SInt64);
     error = ExtAudioFileGetProperty(inputFile, kExtAudioFileProperty_FileLengthFrames, &intSize, &numFrames);
     checkCAError(error, "Error reading number of frames.");
