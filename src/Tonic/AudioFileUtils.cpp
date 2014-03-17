@@ -11,6 +11,10 @@
 #ifdef __APPLE__
 #include <AudioToolbox/AudioToolbox.h>
 #endif
+#if defined( __WIN32__ ) || defined( _WIN32 )
+#include <sndfile.hh>
+#include <stdio.h>
+#endif
 
 namespace Tonic {
 
@@ -90,7 +94,20 @@ namespace Tonic {
   #else
   
   SampleTable loadAudioFile(string path, int numChannels){
-    Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
+    //Tonic::error("loadAudioFile is currently only implemented for Apple platforms.");
+
+      SndfileHandle myf = SndfileHandle(path.c_str());
+
+      printf ("Opened file '%s'\n", path.c_str()) ;
+      printf ("    Sample rate : %d\n", myf.samplerate()) ;
+      printf ("    Channels    : %d\n", myf.channels()) ;
+      printf ("    Error       : %s\n", myf.strError());
+      printf ("    Frames      : %d\n", int(myf.frames())); // frames is essentially samples
+
+      SampleTable destinationTable = SampleTable((int)myf.frames(), myf.channels());
+      int readCount = myf.readf(destinationTable.dataPointer(), (int)myf.frames());
+      printf ("Read %d frames into %d\n", readCount, destinationTable.dataPointer());
+      return destinationTable;
   }
   
   
