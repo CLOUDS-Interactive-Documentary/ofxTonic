@@ -107,6 +107,8 @@ namespace Tonic {
       SampleTable destinationTable = SampleTable((int)myf.frames(), myf.channels());
       int readCount = myf.readf(destinationTable.dataPointer(), (int)myf.frames());
       printf ("Read %d frames into %d\n", readCount, destinationTable.dataPointer());
+
+      
       return destinationTable;
   }
   
