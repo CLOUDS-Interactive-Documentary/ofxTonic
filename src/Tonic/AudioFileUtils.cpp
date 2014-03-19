@@ -100,6 +100,7 @@ namespace Tonic {
 
       printf ("Opened file '%s'\n", path.c_str()) ;
       printf ("    Sample rate : %d\n", myf.samplerate()) ;
+      printf ("    Format      : %X\n", myf.format());
       printf ("    Channels    : %d\n", myf.channels()) ;
       printf ("    Error       : %s\n", myf.strError());
       printf ("    Frames      : %d\n", int(myf.frames())); // frames is essentially samples
