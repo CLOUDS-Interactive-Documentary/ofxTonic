@@ -121,3 +121,5 @@ lib/iOS/
 # ...none. Everything is now explained.
 
 *.sdf
+
+/*/x64
